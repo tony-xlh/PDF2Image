@@ -60,6 +60,7 @@
         </label>
       </div>
       <div id="dwtcontrolContainer"></div>
+      <div class="info"></div>
     </div>
     <script>
       let DWObject;
@@ -76,8 +77,20 @@
           DWObject.Viewer.width = "100%";
           DWObject.Viewer.height = "100%";
           DWObject.SetViewMode(1,1);
+          DWObject.RegisterEvent('OnBufferChanged',function (bufferChangeInfo) {
+            updateImageInfo();
+          });
         });
         Dynamsoft.DWT.Load();
+      }
+
+      function updateImageInfo(){
+        let index = DWObject.CurrentImageIndexInBuffer;
+        let info = "";
+        info = "Bitdepth: "+DWObject.GetImageBitDepth(index) + "\n";
+        info = info + "Width: "+DWObject.GetImageWidth(index) + "\n";
+        info = info + "Height: "+DWObject.GetImageHeight(index);
+        document.getElementsByClassName("info")[0].innerText = info;
       }
 
       function LoadFiles(){
