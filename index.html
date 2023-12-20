@@ -19,6 +19,15 @@
         margin: 10px 0;
         padding: 10px;
       }
+
+      .viewer {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .info {
+        padding: 10px;
+      }
     </style>
   </head>
   <body>
@@ -59,8 +68,10 @@
           </select>
         </label>
       </div>
-      <div id="dwtcontrolContainer"></div>
-      <div class="info"></div>
+      <div class="viewer">
+        <div id="dwtcontrolContainer"></div>
+        <div class="info"></div>
+      </div>
     </div>
     <script>
       let DWObject;
@@ -86,8 +97,8 @@
 
       function updateImageInfo(){
         let index = DWObject.CurrentImageIndexInBuffer;
-        let info = "";
-        info = "Bitdepth: "+DWObject.GetImageBitDepth(index) + "\n";
+        let info = "Info of the selected image\n";
+        info = info + "Bitdepth: "+DWObject.GetImageBitDepth(index) + "\n";
         info = info + "Width: "+DWObject.GetImageWidth(index) + "\n";
         info = info + "Height: "+DWObject.GetImageHeight(index);
         document.getElementsByClassName("info")[0].innerText = info;
